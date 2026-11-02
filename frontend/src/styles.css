@@ -3,3 +3,64 @@
 @media(max-width:900px){.sidebar{transform:translateX(-100%);transition:transform .25s ease;width:260px;box-shadow:15px 0 40px #1c24401a}.sidebar.sidebar-open{transform:translateX(0)}.mobile-scrim{display:block;position:fixed;inset:0;background:#17203355;border:0;z-index:19}.mobile-menu,.close-menu{display:grid}.main-panel{margin-left:0}.summary-grid{grid-template-columns:1fr 1fr}.balance-card{grid-column:1/-1}.content-grid{grid-template-columns:1fr 1fr}.page-content{max-width:760px}.topbar{height:66px}}
 @media(max-width:620px){.topbar{padding:0 15px}.topbar-actions{gap:8px}.search-box{width:36px;padding:0 9px;border:0;background:transparent}.search-box input,.search-box kbd{display:none}.search-box svg{width:20px;height:20px}.page-content{padding:24px 14px}.welcome-row{align-items:flex-start;flex-direction:column;gap:17px}.welcome-row h1{font-size:22px}.welcome-actions{width:100%}.welcome-actions button{flex:1}.summary-grid{grid-template-columns:1fr 1fr;gap:10px}.balance-card{grid-column:1/-1}.metric-card{padding:14px;min-height:180px}.metric-card h2{font-size:18px}.content-grid{grid-template-columns:1fr}.accounts-grid{grid-template-columns:1fr}.account-card{padding:14px}.transactions-heading{align-items:flex-start;flex-direction:column}.transaction-actions{width:100%;justify-content:space-between}.footer{flex-direction:column;gap:10px}.footer>div{gap:12px}.breadcrumb{font-size:10px}.top-avatar{width:30px;height:30px}.notification-button{padding:5px}.panel{padding:16px}.chart-total{font-size:12px}.balance-amount{font-size:27px}.table-wrap table{min-width:570px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+
+/* Finix motion and interaction polish */
+html{scroll-behavior:smooth}
+body{overflow-x:hidden}
+button,a,input,select{ -webkit-tap-highlight-color:transparent }
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #aaa5f2;outline-offset:3px}
+@keyframes finix-rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@keyframes finix-fade{from{opacity:0}to{opacity:1}}
+@keyframes finix-slide{from{opacity:0;transform:translateX(-12px)}to{opacity:1;transform:translateX(0)}}
+@keyframes finix-pop{0%{opacity:0;transform:scale(.96)}70%{transform:scale(1.012)}100%{opacity:1;transform:scale(1)}}
+@keyframes finix-shimmer{0%{transform:translateX(-130%) rotate(18deg)}100%{transform:translateX(230%) rotate(18deg)}}
+@keyframes finix-grow{from{transform:scaleY(.08);opacity:.45}to{transform:scaleY(1);opacity:1}}
+@keyframes finix-pulse{0%,100%{box-shadow:0 0 0 0 #a7f0d255}50%{box-shadow:0 0 0 7px #a7f0d200}}
+.sidebar{animation:finix-slide .55s cubic-bezier(.2,.75,.25,1) both}
+.topbar{animation:finix-fade .55s ease both}
+.welcome-row{animation:finix-rise .55s .08s ease both}
+.summary-grid>.balance-card{animation:finix-pop .65s .12s cubic-bezier(.2,.8,.2,1) both}
+.summary-grid>.metric-card:nth-child(2){animation:finix-rise .55s .2s ease both}
+.summary-grid>.metric-card:nth-child(3){animation:finix-rise .55s .29s ease both}
+.content-grid>.panel:first-child{animation:finix-rise .6s .34s ease both}
+.content-grid>.panel:last-child{animation:finix-rise .6s .42s ease both}
+.accounts-panel{animation:finix-rise .6s .48s ease both}
+.transactions-panel{animation:finix-rise .6s .55s ease both}
+.balance-card{isolation:isolate;transition:transform .35s ease,box-shadow .35s ease}
+.balance-card:after{content:"";position:absolute;z-index:0;inset:-45% auto -45% -35%;width:28%;background:linear-gradient(90deg,transparent,#ffffff13,transparent);transform:translateX(-130%) rotate(18deg);pointer-events:none}
+.balance-card:hover:after{animation:finix-shimmer 1.1s ease}
+.balance-card:hover{transform:translateY(-3px);box-shadow:0 16px 34px #4c48a533}
+.metric-card,.panel,.account-card{transition:transform .28s ease,border-color .28s ease,box-shadow .28s ease}
+.metric-card:hover,.panel:hover{border-color:#e1e0fb;box-shadow:0 10px 28px #29345a0b}
+.account-card:hover{transform:translateY(-4px);border-color:#dcdafa;box-shadow:0 12px 25px #29345a0d}
+.nav-item{position:relative;overflow:hidden}
+.nav-item:before{content:"";position:absolute;left:0;top:22%;bottom:22%;width:3px;border-radius:0 4px 4px 0;background:#625bd5;transform:scaleY(0);transition:transform .2s ease}
+.nav-item.active:before{transform:scaleY(1)}
+.nav-item:hover{transform:translateX(3px)}
+.primary-button,.secondary-button,.select-button,.text-button,.icon-button,.more-button,.pagination-button{transition:transform .2s ease,background .2s ease,border-color .2s ease,box-shadow .2s ease}
+.primary-button:hover{box-shadow:0 8px 18px #625bd533}
+.primary-button:active,.secondary-button:active,.select-button:active,.icon-button:active,.more-button:active{transform:scale(.97)}
+.icon-button:hover,.more-button:hover{color:#625bd5;transform:translateY(-1px)}
+.bar-column span{transform-origin:bottom;animation:finix-grow .8s cubic-bezier(.2,.8,.2,1) both}
+.bar-column:nth-child(2n) span{animation-delay:.06s}
+.bar-column:nth-child(3n) span{animation-delay:.12s}
+.mini-bars i{transform-origin:bottom;animation:finix-grow .75s ease both}
+.mini-bars i:nth-child(3n){animation-delay:.12s}
+.donut{animation:finix-pop .7s .35s ease both;transition:transform .3s ease}
+.donut:hover{transform:rotate(8deg) scale(1.04)}
+.balance-dot,.online-dot{animation:finix-pulse 2.4s ease-in-out infinite}
+.transaction-name{transition:transform .2s ease}
+tbody tr{transition:background .2s ease}
+tbody tr:hover{background:#fafaff}
+tbody tr:hover .transaction-name{transform:translateX(3px)}
+.status-pill{transition:transform .2s ease}
+tbody tr:hover .status-pill{transform:scale(1.04)}
+.notice{animation:finix-rise .3s ease both}
+.modal-backdrop{animation:finix-fade .2s ease both}
+.transfer-modal{animation:finix-pop .28s cubic-bezier(.2,.8,.2,1) both}
+.search-box{transition:border-color .2s ease,box-shadow .2s ease,background .2s ease}
+.search-box:focus-within{border-color:#aaa5ef;background:#fff;box-shadow:0 0 0 3px #7169df12}
+.transfer-modal input,.transfer-modal select{transition:border-color .2s ease,box-shadow .2s ease}
+.footer a:hover{color:#625bd5}
+@media(max-width:900px){.sidebar{animation:none}.sidebar.sidebar-open{animation:finix-slide .28s ease both}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
