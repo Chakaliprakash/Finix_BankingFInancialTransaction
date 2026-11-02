@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import {
   Activity, ArrowDownLeft, ArrowDownRight, ArrowLeftRight, ArrowUpRight,
   Bell, BriefcaseBusiness, Building2, CalendarDays, Check, ChevronDown,
@@ -191,7 +191,7 @@ export default function App() {
 
         <section className="panel transactions-panel">
           <div className="panel-heading transactions-heading"><div><h3>Recent transactions</h3><p>Keep track of your latest activity</p></div><div className="transaction-actions"><button className="select-button filter-button" onClick={() => setFilter(current => current === "All" ? "Income" : current === "Income" ? "Expense" : current === "Expense" ? "Transfer" : "All")}><Filter size={14}/>{filter}<ChevronDown size={13}/></button><button className="text-button" onClick={() => navigate("Transactions")}>View all <ArrowUpRight size={15}/></button></div></div>
-          <div className="table-wrap"><table><thead><tr><th>NAME / DESCRIPTION</th><th>DATE</th><th>AMOUNT</th><th>STATUS</th><th></th></tr></thead><tbody>
+          <div className="table-wrap"><table><thead><tr><th>NAME / DESCRIPTION</th><th>DATE</th><th>AMOUNT</th><th>STATUS</th><th/></tr></thead><tbody>
             {filteredTransactions.map(tx => <tr key={tx.id}><td><div className="transaction-name"><span className={`transaction-avatar ${tx.tone}`}>{tx.initials}</span><div><strong>{tx.name}</strong><small>{tx.category} · {tx.id}</small></div></div></td><td className="date-cell">{tx.date}</td><td className={`amount-cell ${tx.amount > 0 ? "amount-positive" : ""}`}>{tx.amount > 0 ? "+" : "−"}{money(Math.abs(tx.amount))}</td><td><span className={`status-pill ${tx.status.toLowerCase()}`}><i/>{tx.status}</span></td><td><button className="more-button"><MoreHorizontal size={18}/></button></td></tr>)}
           </tbody></table>{filteredTransactions.length === 0 && <div className="empty-state">No transactions match your search.</div>}</div>
           <div className="table-footer"><span>Showing {filteredTransactions.length} of {transactions.length} transactions</span><div><button className="pagination-button" disabled><ChevronLeft size={16}/></button><button className="pagination-button selected-page">1</button><button className="pagination-button" disabled><ChevronRight size={16}/></button></div></div>
