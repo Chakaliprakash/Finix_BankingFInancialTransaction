@@ -153,6 +153,30 @@ export default function App() {
           <div className="welcome-actions"><button className="secondary-button" onClick={() => setNotice("Your monthly report is being prepared in demo mode.")}><Download size={16}/> Export report</button><button className="primary-button" onClick={() => setModalOpen(true)}><Plus size={17}/> New transfer</button></div>
         </section>
 
+        <section className="finix-hero-3d" aria-label="Finix premium banking card">
+          <div className="hero-copy-3d">
+            <span className="hero-kicker"><span className="hero-kicker-dot"/> THE NEXT GENERATION OF BANKING</span>
+            <h2>Money moves.<br/><em>You move forward.</em></h2>
+            <p>A clearer view of your money, with every account and transaction in one beautifully connected space.</p>
+            <div className="hero-trust-row"><span><ShieldCheck size={15}/> Secure workspace</span><span><Activity size={15}/> Live overview</span></div>
+          </div>
+          <div className="hero-visual-3d" aria-hidden="true">
+            <div className="hero-orbit orbit-one"/><div className="hero-orbit orbit-two"/>
+            <div className="hero-glow"/>
+            <div className="floating-chip"><Sparkles size={13}/> FINIX PREMIUM</div>
+            <div className="finix-card-3d">
+              <div className="card-topline"><span className="card-brand">finix<span>.</span></span><span className="card-contactless">)))</span></div>
+              <div className="card-chip-3d"><i/><i/><i/><i/></div>
+              <div className="card-number-3d">•••• &nbsp; •••• &nbsp; •••• &nbsp; 4829</div>
+              <div className="card-bottomline"><div><small>ACCOUNT HOLDER</small><strong>PRAKASH CHAKALI</strong></div><div className="card-network"><i/><i/></div></div>
+              <div className="card-glass-shine"/>
+            </div>
+            <div className="floating-stat"><span className="stat-icon-3d"><TrendingUp size={15}/></span><div><small>MONTHLY GROWTH</small><strong>+8.24%</strong></div><span className="stat-spark">↗</span></div>
+            <div className="floating-ring ring-a"/><div className="floating-ring ring-b"/>
+          </div>
+          <div className="hero-bottom-glow"/>
+        </section>
+
         <section className="summary-grid">
           <div className="balance-card">
             <div className="balance-card-top"><div className="balance-label"><span className="balance-dot"/> TOTAL ACCOUNT BALANCE</div><button className="balance-eye" onClick={() => setShowBalance(v => !v)} aria-label="Toggle balance visibility">{showBalance ? <Eye size={17}/> : <EyeOff size={17}/>}</button></div>
