@@ -110,6 +110,27 @@ export default function App() {
   const [transactions, setTransactions] = useState(initialTransactions);
   const [notice, setNotice] = useState("");
 
+  const handleHeroPointer = (event) => {
+    const bounds = event.currentTarget.getBoundingClientRect();
+    const x = (event.clientX - bounds.left) / bounds.width;
+    const y = (event.clientY - bounds.top) / bounds.height;
+    event.currentTarget.style.setProperty("--pointer-x", `${x * 100}%`);
+    event.currentTarget.style.setProperty("--pointer-y", `${y * 100}%`);
+    const card = event.currentTarget.querySelector(".finix-card-3d");
+    if (card && window.matchMedia("(prefers-reduced-motion: no-preference)").matches) {
+      card.style.setProperty("--tilt-x", `${(0.5 - y) * 15}deg`);
+      card.style.setProperty("--tilt-y", `${(x - 0.5) * 22}deg`);
+    }
+  };
+
+  const resetHeroPointer = (event) => {
+    const card = event.currentTarget.querySelector(".finix-card-3d");
+    if (card) {
+      card.style.removeProperty("--tilt-x");
+      card.style.removeProperty("--tilt-y");
+    }
+  };
+
   const filteredTransactions = useMemo(() => transactions.filter(tx => {
     const matchesQuery = (tx.name + tx.category + tx.id).toLowerCase().includes(query.toLowerCase());
     const matchesFilter = filter === "All" || (filter === "Income" ? tx.amount > 0 : filter === "Expense" ? tx.amount < 0 : tx.category === "Transfer");
@@ -153,7 +174,7 @@ export default function App() {
           <div className="welcome-actions"><button className="secondary-button" onClick={() => setNotice("Your monthly report is being prepared in demo mode.")}><Download size={16}/> Export report</button><button className="primary-button" onClick={() => setModalOpen(true)}><Plus size={17}/> New transfer</button></div>
         </section>
 
-        <section className="finix-hero-3d" aria-label="Finix premium banking card">
+        <section className="finix-hero-3d" aria-label="Finix premium banking card" onPointerMove={handleHeroPointer} onPointerLeave={resetHeroPointer}>
           <div className="hero-copy-3d">
             <span className="hero-kicker"><span className="hero-kicker-dot"/> THE NEXT GENERATION OF BANKING</span>
             <h2>Money moves.<br/><em>You move forward.</em></h2>
